@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <unordered_map>
 #include <vector>
 #include <algorithm>
@@ -118,10 +117,12 @@ int main() {
     vector<unordered_map<string, double>> books;
 
     // First work on each book's top 100 normalized word frequencies
+    int i=0;
     for (const auto& x : fs::directory_iterator(directoryPath)) {
         if (x.is_regular_file() && x.path().extension() == ".txt") {
             string filename = (string)x.path();
-            cout << "Processing " << filename << "...\n";
+            i++;
+            cout << "file "+to_string(i)+": " << filename << "...\n";
             books.push_back(calcTopHundred(filename));
         }
     }
